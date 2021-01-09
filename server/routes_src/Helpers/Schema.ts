@@ -1,12 +1,11 @@
 interface User {
-    id: string,
-    name: string,
+    username: string,
     email: string,
     password: string,
     type: "Individual" | "Organization",
 }
 
-interface Request {
+interface Listing {
     id: string,
     /**
      * Refers to the id of a User
@@ -16,6 +15,7 @@ interface Request {
     description: string,
     quantity: number,
     unit: "Kilograms" | "Containers" | "Milliliters" | "Each",
-    fulfilled: boolean,
+    type: "Request" | "Offer"
+    expired: boolean,
     timestamp: number
 }
