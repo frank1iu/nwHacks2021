@@ -8,9 +8,9 @@ router.get("/health", function (req, res, next) {
 });
 
 router.post("/register", async (req, res, next) => {
-  const username = req.params.username;
-  const email = req.params.username;
-  const type = req.params.type as any;
+  const username = req.body.username;
+  const email = req.body.username;
+  const type = req.body.type as any;
   const password = await db.registerUser(username, email, type);
   res.status(200).send({success: true, password: password});
 });
