@@ -2,8 +2,7 @@ interface User {
     id: string,
     name: string,
     email: string,
-    passwordSalt: string,
-    passwordHash: string,
+    password: string,
     type: "Individual" | "Organization",
 }
 
