@@ -1,2 +1,4 @@
 routes
 # ^^^^ This is the compiled JS - the typescript source code is in routes_src/
+
+credentials*.json
