@@ -16,11 +16,11 @@ export default class FirestoreAccess {
      * @param type User's type: "Individual" | "Organization"
      * @returns Promise containing user's assigned password
      */
-    async registerUser(username: string, email: string, type: "Individual" | "Organization"): Promise<string> {
+    async registerUser(username: string, email: string, name: string, type: "Individual" | "Organization"): Promise<string> {
         const doc = this.#db.collection('users').doc(username);
         const password = uuidv4();
         await doc.set({
-            username, email, type, password
+            username, email, type, name, password
         });
         return password;
     }
