@@ -8,10 +8,7 @@ router.get("/health", function (req, res, next) {
 });
 
 router.post("/register", async (req, res, next) => {
-  const username = req.body.username;
-  const email = req.body.username;
-  const type = req.body.type as any;
-  const password = await db.registerUser(username, email, type);
+  const password = await db.registerUser(req.body.username, req.body.email, req.body.name, req.body.type as any);
   res.status(200).send({success: true, password: password});
 });
 
