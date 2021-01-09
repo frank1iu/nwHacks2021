@@ -7,4 +7,12 @@ router.get("/welcome", function (req, res, next) {
   res.status(200).send({ welcomeMessage: "welcome" });
 });
 
+router.post("/register", async (req, res, next) => {
+  const username = req.params.username;
+  const email = req.params.username;
+  const type = req.params.type as any;
+  const password = await db.registerUser(username, email, type);
+  res.status(200).send({success: true, password: password});
+});
+
 export = router;
