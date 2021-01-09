@@ -3,6 +3,7 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Route, Link } from "react-router-dom";
 import MainTabs from "./MainTabs";
+import TopBar from "./TopBar";
 
 // const useStyles = makeStyles((theme) => ({
 //   landingContainer: {
@@ -14,6 +15,7 @@ export default function Landing() {
   // const classes = useStyles();
   return (
     <div>
+      <TopBar />
       <MainTabs />
     </div>
   );
