@@ -5,4 +5,4 @@ router.get("/welcome", function (req, res, next) {
   res.status(200).send({ welcomeMessage: "welcome" });
 });
 
-export default router;
+export = router;
