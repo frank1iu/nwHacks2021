@@ -32,3 +32,23 @@ interface Notification {
   read: boolean;
   notificationTimestamp: number;
 }
+
+interface Message {
+    id: string;
+    /**
+     * Refers to the id of a User
+     */
+    sender: string;
+    dateSent: number;
+    text: string;
+    read: boolean;
+  }
+
+interface Conversation {
+    id: string;
+    /**
+     * Refers to the ids of a User
+     */
+    usernames: Array<string>;
+    messages: Array<Message>;
+  }

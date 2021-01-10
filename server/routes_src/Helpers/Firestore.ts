@@ -124,9 +124,98 @@ export default class FirestoreAccess {
         const userNotifications = [] as Array<Notification>
 
         userNotificationsSnapshot.forEach(async doc => {
-            const data = await doc.data() as Notification;
+            const data = doc.data() as Notification;
             userNotifications.push(data)
           });
         return userNotifications;
+    }
+
+    /**
+     * Creates a conversation between two users
+     * @param username1 User's username
+     * @param username2 User's username 
+     * @returns Promise containing all notifications
+     */
+    async createConversation(username1: string, username2: string): Promise<string> {
+        const user1Doc = await this.#db.collection('users').doc(username1).get();
+        const user2Doc = await this.#db.collection('users').doc(username2).get();
+        if (!user1Doc.exists || !user2Doc.exists) {
+            throw new Error("User not found");
+        }
+
+        const conversationsRef = this.#db.collection('conversations');
+        const conversationsSnapshot = await conversationsRef.where('usernames', "array-contains", username1).get();
+
+        if (!conversationsSnapshot.empty) {
+            conversationsSnapshot.forEach(conversationDoc => {
+                const conversation = conversationDoc.data() as Conversation;
+                if(conversation.usernames.includes(username1) && conversation.usernames.includes(username2)) {
+                    throw new Error("Conversation already exists");
+                }
+            })
+        }  
+
+        const id = uuidv4();
+        const messages = [] as Array<Message>;
+        const usernames = [username1, username2]
+        const conversationDoc = this.#db.collection('conversations').doc(id);
+        await conversationDoc.set({
+            id, usernames, messages
+        })
+        return id;
+    }
+
+    /**
+     * Fetches all of a user's conversations
+     * @param username User's username
+     * @returns Promise containing all notifications
+     */
+    async getConversations(username: string): Promise<Array<Conversation>> {
+        const conversationsRef = this.#db.collection('conversations');
+        const userConversationsSnapshot = await conversationsRef.where('usernames', "array-contains", username).get();
+
+        if (userConversationsSnapshot.empty) {
+            throw new Error("No conversations found");
+        }  
+
+        const userConversations = [] as Array<Conversation>
+
+        userConversationsSnapshot.forEach(async doc => {
+            const data = doc.data() as Conversation;
+            userConversations.push(data)
+          });
+
+        return userConversations;
+    }
+
+    /**
+     * Fetches all of a user's conversations
+     * @param sender Sending user's username
+     * @param conversationId conversation Id
+     * @param text message text
+     * @returns Promise containing all notifications
+     */
+    async addMessage(sender: string, conversationId: string, text: string): Promise<string> {
+        const userDoc = await this.#db.collection('users').doc(sender).get();
+        const conversationDocRef = await this.#db.collection('conversations').doc(conversationId);
+        const conversationDoc = await conversationDocRef.get()
+        if (!userDoc.exists || !conversationDoc.exists) {
+            throw new Error("Error sending message");
+        }
+        const id = uuidv4();
+        const read = false;
+        const dateSent = new Date()
+        const messageDoc = this.#db.collection('messages').doc(id);
+        const messageObject = {id, dateSent, sender, text, read}
+
+        await messageDoc.set(messageObject)
+
+        const conversationData = conversationDoc.data()
+        const messages = conversationData.messages
+        messages.push(messageObject)
+        await conversationDocRef.update({
+            messages
+        })
+        return id;
     }
 }
