@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { InputBase, Button } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,13 +59,28 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function ItemInput({listingType}) {
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+  }
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  }
 
   const [item, setItem] = useState("")
   const [description, setDescription] = useState("")
   const [quantity, setQuantity] = useState(null)
 
-  const createListing = () => {
+  const createListing = (e) => {
+    e.target.reset()
     const submitter = localStorage.getItem("user")
     const data = {submitter, description, item, quantity: parseInt(quantity), unit: "Each", type: listingType}
     console.log(data)
@@ -78,33 +95,40 @@ export default function ItemInput({listingType}) {
   }
 
   return (
-      <Grid container  alignItems="center" justify="center" className={classes.root}>
-        <Paper className={classes.paper} alignItems="center" justify="center" >
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm container>
-              <Grid className={classes.second} item xs container direction="column" spacing={2}>
-                <Grid item xs> 
-                  <Grid> 
-                    <p className={classes.fileLabel}>Attach an image</p>
-                    <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
+    <form onSubmit={createListing}>
+        <Grid container  justify="center" className={classes.root}>
+          <Paper className={classes.paper}  justify="center" >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm container>
+                <Grid className={classes.second} item xs container direction="column" spacing={2}>
+                  <Grid item xs> 
+                    <Grid> 
+                      <p className={classes.fileLabel}>Attach an image</p>
+                      <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item>
-                <Grid container direction='column'>
-                  <InputBase className={classes.title} onChange={e => setItem(e.target.value)} type="text" placeholder="  Title" />
-                  <InputBase className={classes.description} onChange={e => setDescription(e.target.value)} type="text" placeholder="  Description"  />
-                  <InputBase className={classes.quantity} onChange={e => setQuantity(e.target.value)} type="number" placeholder="  Qty Offered"  />
-                  <Grid item>
-                    <Button type='outline' className={classes.post}>
-                      Post
-                    </Button>
+                <Grid item>
+                  <Grid container direction='column'>
+                    <InputBase className={classes.title} onChange={e => setItem(e.target.value)} type="text" placeholder="  Title" />
+                    <InputBase className={classes.description} onChange={e => setDescription(e.target.value)} type="text" placeholder="  Description"  />
+                    <InputBase className={classes.quantity} onChange={e => setQuantity(e.target.value)} type="number" placeholder="  Qty Offered"  />
+                    <Grid item>
+                      <Button type='submit' className={classes.post} onClick={handleClick}>
+                        Post
+                      </Button>
+                      <Snackbar className={classes.snackbar} open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose}>
+                          Posting submitted!
+                        </Alert>
+                      </Snackbar>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
+          </Paper>
+        </Grid>
+      </form>
   );
 }
