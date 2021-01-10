@@ -2,19 +2,58 @@ import React, {useState, useEffect} from "react";
 import { InputBase, Button } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     justify: 'center',
-    
+    padding: '30px'
+  },
+  chooseFile:{
+    marginLeft: '30px',
+    height: '10px',
   },
   post: {
-    color: 'red'
+    background: '#ffc06e',
+    alignSelf: 'right',
+    marginTop: '7px',
+    borderRadius: 0,
+    marginBottom: '8px'
+  },
+  description: {
+    height: '100px',
+    width: '400px',
+    alignSelf: 'top',
+    background: '#fafafa',
+    marginRight: '10px',
+    marginTop: '5px',
+    textAlign: 'top'
+  },
+  quantity: {
+    height: '40px',
+    width: '400px',
+    alignSelf: 'top',
+    background: '#fafafa',
+    marginRight: '10px',
+    marginTop: '5px'
+  },
+  title: {
+    height: '40px',
+    width: '400px',
+    background: '#fafafa',
+    marginTop: '10px'
+  },
+  fileLabel: {
+    marginLeft: '22px',
+    marginTop: '10px',
+    fontSize: 13,
+    background: '#fafafa',
+    width: '100px',
+    height: '70px',
+    textAlign: 'center',
+    padding: '50px',
+    color: 'grey'
   }
-
 }))
 
 export default function ItemInput({listingType}) {
@@ -44,19 +83,22 @@ export default function ItemInput({listingType}) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm container>
               <Grid className={classes.second} item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <InputBase type="file" inputProps={{ accept: "image/*" }} />
+                <Grid item xs> 
+                  <Grid> 
+                    <p className={classes.fileLabel}>Attach an image</p>
+                    <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
+                  </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                <Grid>
-                  <InputBase type="text" value={item} placeholder="Item Title" onChange={e => setItem(e.target.value)} fullWidth />
-                  <InputBase type="text" value={description} placeholder="Description" onChange={e => setDescription(e.target.value)} fullWidth />
-                  <InputBase type="number" value={quantity} placeholder="Qty Offered/Needed" onChange={e => setQuantity(e.target.value)} fullWidth />
-                    <Grid item>
-                      <Button variant='outlined' className={classes.post} onClick={createListing}>
-                        Post
-                      </Button>
+                <Grid container direction='column'>
+                  <InputBase className={classes.title} onChange={e => setItem(e.target.value)} type="text" placeholder="  Title" />
+                  <InputBase className={classes.description} onChange={e => setDescription(e.target.value)} type="text" placeholder="  Description"  />
+                  <InputBase className={classes.quantity} onChange={e => setQuantity(e.target.value)} type="number" placeholder="  Qty Offered"  />
+                  <Grid item>
+                    <Button type='outline' className={classes.post}>
+                      Post
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
