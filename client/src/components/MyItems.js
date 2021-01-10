@@ -36,11 +36,29 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     display: 'block',
-}
+    top: '2px',
+    borderRadius: 0,
+    background: '#E9E9E9'
+  },
+  thirdsection: {
+    position: 'relative',
+    top: '10px',
+    left: '50px'
+  }
 }));
 
 export default function MyItems() {
   const classes = useStyles();
+  const ColoredLine = () => (
+    <hr
+        style={{
+            border: 0,
+            background: 'orange',
+            height: 1,
+            borderStyle: 'inset'
+        }}
+    />
+  );
   return (
     <div className={classes.root}>
     <Paper className={classes.paper}>
@@ -56,6 +74,7 @@ export default function MyItems() {
               <Typography gutterBottom variant="subtitle1">
                 Request or Offer
               </Typography>
+              <ColoredLine />
               <Typography variant="body2" gutterBottom>
                 Item Name
               </Typography>
@@ -63,17 +82,12 @@ export default function MyItems() {
                 Details
               </Typography>
             </Grid>
-            <Grid item>
-              <Button className={classes.request}>
-                ???
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid class='row}'>
-              <Button className={classes.button}>Edit Post</Button>
-              <Button className={classes.button}>Delete Post</Button>
-              <Button className={classes.button}>Toggle </Button>
+          </Grid >
+          <Grid item className={classes.thirdsection}>
+            <Grid class='row' item >
+              <Button className={classes.button} size='small'>Edit Post</Button>
+              &nbsp;
+              <Button className={classes.button}size='small'>Delete Post</Button>
             </Grid>
           </Grid>
         </Grid>

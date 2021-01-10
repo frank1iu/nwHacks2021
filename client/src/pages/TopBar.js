@@ -19,15 +19,17 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   offerButton: {
-    color: "white",
-    background: '#8FDDEC',
+    color: "black",
+    border: '2px solid orange',
+    background: '#f7f7f7'
   },
   main: {
-    padding: '38px', 
+    marginTop: '80px'
   },
   requestButton: {
-    color: "white",
-    background: '#FFB478'
+    color: "black",
+    border: '2px solid orange',
+    background: '#f7f7f7'
   },
   logo: {
     position: 'absolute',
@@ -51,7 +53,7 @@ export default function TopBar() {
 
   return (
     <div className={classes.main}>
-        <img className={classes.logo} alt="share street logo" style={{ width: 120, height: 45 }} src={logo}/>
+        <img className={classes.logo} alt="share street logo" style={{ width: 140, height: 50 }} src={logo}/>
         <Grid className={classes.iconButtons}>
           <IconButton>
             <InboxOutlined/>
@@ -64,17 +66,17 @@ export default function TopBar() {
           </IconButton>
         </Grid>
         <Grid className={classes.mainButtons}>
-          <NavLink to="/offerform">
+          <NavLink to="/offerform" style={{ textDecoration: 'none' }}>
             <Button 
               className={classes.offerButton}
-              variant="contained" 
+              variant="outlined" 
             >Create Offer</Button>
           </NavLink>
           &nbsp;
-          <NavLink to="/requestform">
+          <NavLink to="/requestform" style={{ textDecoration: 'none' }}>
             <Button 
               className={classes.requestButton}
-              variant="contained"
+              variant="outlined"
             >Create Request</Button>
           </NavLink>
         </Grid>

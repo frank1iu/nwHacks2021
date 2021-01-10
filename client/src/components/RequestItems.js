@@ -33,11 +33,31 @@ const useStyles = makeStyles((theme) => ({
   request: {
     width: 100,
     height: 30,
+    background: '#ffc06e',
+    variant: 'ourlined'
+  },
+  thirdsection: {
+    position: 'relative',
+    top: '10px',
+    left: '50px'
+  }, 
+  thirdsectiontext: {
+    fontSize: 11
   }
 }));
 
 export default function RequestItems() {
   const classes = useStyles();
+  const ColoredLine = () => (
+    <hr
+        style={{
+            border: 0,
+            background: 'orange',
+            height: 1,
+            borderStyle: 'inset'
+        }}
+    />
+  );
   return (
     <div className={classes.root}>
     <Paper className={classes.paper}>
@@ -53,6 +73,7 @@ export default function RequestItems() {
               <Typography gutterBottom variant="subtitle1">
                 Organization Name
               </Typography>
+              <ColoredLine />
               <Typography variant="body2" gutterBottom>
                 Item Name
               </Typography>
@@ -66,12 +87,12 @@ export default function RequestItems() {
               </Button>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid item item className={classes.thirdsection}>
             <Grid>
-              <Typography>Date</Typography>
-              <Typography>Location</Typography>
-              <Typography>Contact</Typography>
-              <Typography>Details</Typography>
+              <Typography className={classes.thirdsectiontext}>Date</Typography>
+              <Typography className={classes.thirdsectiontext}>Location</Typography>
+              <Typography className={classes.thirdsectiontext}>Contact</Typography>
+              <Typography className={classes.thirdsectiontext}>Details</Typography>
             </Grid>
           </Grid>
         </Grid>
