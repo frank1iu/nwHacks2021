@@ -8,6 +8,6 @@ resource "google_container_cluster" "backend" {
   }
 }
 
-resource "google_compute_address" "ingress" {
+resource "google_compute_global_address" "ingress" {
   name = "sharestreet-ingress"
 }
