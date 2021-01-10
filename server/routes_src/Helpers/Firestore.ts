@@ -84,7 +84,6 @@ export default class FirestoreAccess {
         if (!userDoc.exists) {
             throw new Error("User " + username + " not found!");
         }
-
         const id = uuidv4();
         const read = false;
         const notificationTimestamp = new Date()
@@ -96,15 +95,17 @@ export default class FirestoreAccess {
     }
 
     /**
-     * Marks a notification as read
-     * @param id notification Id
+     * Marks an array of notification as read
+     * @param idArray notification Id
      * @returns Promise containing success/fail result
      */
-    async markNotificationAsRead(id: string): Promise<boolean> {
-        const docRef = await this.#db.collection('notifications').doc(id);
-        // will automatically fail if doc does not exist
-        docRef.update({read: true})
-        return true
+    async markNotificationAsRead(idArray: Array<string>): Promise<boolean> {
+        idArray.forEach(async id => {
+            const docRef = await this.#db.collection('notifications').doc(id);
+            // will automatically fail if doc does not exist
+            docRef.update({read: true});
+        });
+        return true;
     }
 
     /**

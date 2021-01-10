@@ -12,4 +12,19 @@ router.post("/register", async (req, res, next) => {
   res.status(200).send({success: true, password: password});
 });
 
+router.get("/notification", async (req, res, next) => {
+  const notifications = await db.getNotifications(req.body.username);
+  res.status(200).send({success: true, notifications});
+});
+
+router.post("/notification", async (req, res, next) => {
+  const success = await db.addNotification(req.body.username, req.body.content, req.body.type as any);
+  res.status(200).send({success});
+});
+
+router.patch("/notification", async (req, res, next) => {
+  const success = await db.markNotificationAsRead(req.body.notificationIds);
+  res.status(200).send({success});
+});
+
 export = router;
