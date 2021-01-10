@@ -26,10 +26,6 @@ class TopBar extends React.Component {
         <NavLink to="/requestform">
           <Button>Create Request</Button>
         </NavLink>
-
-        {/* <Switch>
-          <Route path="/form" component={CreateNewRequest} />
-        </Switch> */}
       </div>
     );
   }

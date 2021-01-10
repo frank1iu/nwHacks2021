@@ -1,8 +1,9 @@
 import React from "react";
-
+import { Button, Input } from "@material-ui/core";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Items from "../components/Items";
+import { SearchOutlined } from "@material-ui/icons";
 
 class MainTabs extends React.Component {
   render() {
@@ -16,14 +17,29 @@ class MainTabs extends React.Component {
           </TabList>
 
           <TabPanel>
-            <h2>Offers Content</h2>
+            <Input type="text" placeholder="Search Offers..." />
+            <Button>
+              <SearchOutlined />
+            </Button>
+
+            <Items />
             <Items />
           </TabPanel>
           <TabPanel>
-            <h2>Requests Content</h2>
+            <Input type="text" placeholder="Search Requests..." />
+            <Button>
+              <SearchOutlined />
+            </Button>
+            <Items />
+            <Items />
           </TabPanel>
           <TabPanel>
-            <h2>MyDashboard Content</h2>
+            <Input type="text" placeholder="Search My Listings..." />
+            <Button>
+              <SearchOutlined />
+            </Button>
+            <Items />
+            <Items />
           </TabPanel>
         </Tabs>
       </div>
