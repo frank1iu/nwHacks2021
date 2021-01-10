@@ -3,8 +3,14 @@ import { InputBase, Button } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar'
-import MuiAlert from '@material-ui/lab/Alert';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  NavLink,
+  Redirect
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,8 +64,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ItemInput({listingType}) {
-  const [open, setOpen] = React.useState(false);
+export default function ItemInput({listingtype}) {
   const classes = useStyles();
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
@@ -78,11 +83,13 @@ export default function ItemInput({listingType}) {
   const [item, setItem] = useState("")
   const [description, setDescription] = useState("")
   const [quantity, setQuantity] = useState(null)
+  const [redirect, setRedirect] = useState(false)
 
   const createListing = (e) => {
     e.target.reset()
     const submitter = localStorage.getItem("user")
-    const data = {submitter, description, item, quantity: parseInt(quantity), unit: "Each", type: listingType}
+    console.log(listingtype)
+    const data = {submitter, description, item, quantity: parseInt(quantity), unit: "Each", type: listingtype}
     console.log(data)
     fetch(`http://localhost:3001/listing`, {
       headers: {
@@ -91,38 +98,32 @@ export default function ItemInput({listingType}) {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    }).then(res => res.json()).then(res => console.log(res))
+    }).then(res => res.json()).then(res => setRedirect(true))
   }
 
   return (
-    <form onSubmit={createListing}>
-        <Grid container  justify="center" className={classes.root}>
-          <Paper className={classes.paper}  justify="center" >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm container>
-                <Grid className={classes.second} item xs container direction="column" spacing={2}>
-                  <Grid item xs> 
-                    <Grid> 
-                      <p className={classes.fileLabel}>Attach an image</p>
-                      <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
-                    </Grid>
+      <Grid container  alignItems="center" justify="center" className={classes.root}>
+        {redirect && <Redirect to="/main" />}
+        <Paper className={classes.paper} alignItems="center" justify="center" >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm container>
+              <Grid className={classes.second} item xs container direction="column" spacing={2}>
+                <Grid item xs> 
+                  <Grid> 
+                    <p className={classes.fileLabel}>Attach an image</p>
+                    <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
                   </Grid>
                 </Grid>
-                <Grid item>
-                  <Grid container direction='column'>
-                    <InputBase className={classes.title} onChange={e => setItem(e.target.value)} type="text" placeholder="  Title" />
-                    <InputBase className={classes.description} onChange={e => setDescription(e.target.value)} type="text" placeholder="  Description"  />
-                    <InputBase className={classes.quantity} onChange={e => setQuantity(e.target.value)} type="number" placeholder="  Qty Offered"  />
-                    <Grid item>
-                      <Button type='submit' className={classes.post} onClick={handleClick}>
-                        Post
-                      </Button>
-                      <Snackbar className={classes.snackbar} open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose}>
-                          Posting submitted!
-                        </Alert>
-                      </Snackbar>
-                    </Grid>
+              </Grid>
+              <Grid item>
+                <Grid container direction='column'>
+                  <InputBase className={classes.title} onChange={e => setItem(e.target.value)} type="text" placeholder="Title" />
+                  <InputBase className={classes.description} onChange={e => setDescription(e.target.value)} type="text" placeholder="  Description"  />
+                  <InputBase className={classes.quantity} onChange={e => setQuantity(e.target.value)} type="number" placeholder="Quantity"  />
+                  <Grid item>
+                    <Button type='outline' onClick={createListing} className={classes.post}>
+                      Post
+                    </Button>
                   </Grid>
                 </Grid>
               </Grid>

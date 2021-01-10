@@ -45,8 +45,8 @@ export default function CreateNewRequest() {
           <TabList>
             <Tab>Create New Request</Tab>
           </TabList>
-          <TabPanel listingType="Request" className={classes.mainPanel}>
-            <ItemInput />
+          <TabPanel className={classes.mainPanel}>
+            <ItemInput listingtype="Request" />
           </TabPanel>
         </Tabs>
       </div>

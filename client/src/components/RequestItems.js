@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RequestItems() {
+export default function RequestItems({submitter, item, description, quantity, timestamp}) {
   const classes = useStyles();
   const ColoredLine = () => (
     <hr
@@ -69,16 +69,16 @@ export default function RequestItems() {
         </Grid>
         <Grid item xs={12} sm container>
           <Grid className={classes.second} item xs container direction="column" spacing={2}>
-            <Grid item xs>
+          <Grid item xs>
               <Typography gutterBottom variant="subtitle1">
-                Organization Name
+                {submitter}
               </Typography>
               <ColoredLine />
               <Typography variant="body2" gutterBottom>
-                Item Name
+                <strong>{quantity} {item}</strong>
               </Typography>
               <Typography variant="body2" gutterBottom>
-                Details
+                {description}
               </Typography>
             </Grid>
             <Grid item>
@@ -89,10 +89,7 @@ export default function RequestItems() {
           </Grid>
           <Grid item item className={classes.thirdsection}>
             <Grid>
-              <Typography className={classes.thirdsectiontext}>Date</Typography>
-              <Typography className={classes.thirdsectiontext}>Location</Typography>
-              <Typography className={classes.thirdsectiontext}>Contact</Typography>
-              <Typography className={classes.thirdsectiontext}>Details</Typography>
+              <Typography className={classes.thirdsectiontext}>{Date(timestamp * 1000).toString().slice(0, 15)}</Typography>
             </Grid>
           </Grid>
         </Grid>
