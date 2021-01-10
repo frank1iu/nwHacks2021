@@ -13,8 +13,12 @@ router.post("/register", async (req, res, next) => {
 });
 
 router.get("/notification", async (req, res, next) => {
-  const notifications = await db.getNotifications(req.body.username);
-  res.status(200).send({success: true, notifications});
+  try {
+    const user = await db.login(req.body.username, req.body.password);
+    const notifications = await db.getNotifications(req.body.username);
+    res.status(200).send({success: true, notifications});
+  } catch (_) {
+    res.status(304).send({success: false});
 });
 
 router.post("/notification", async (req, res, next) => {
