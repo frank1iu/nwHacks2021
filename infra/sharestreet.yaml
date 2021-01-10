@@ -19,14 +19,14 @@ spec:
         app: sharestreet
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: sharestreet
+        image: gcr.io/theta-disk-301219/sharestreet
         ports:
-        - containerPort: 80
+        - containerPort: 3001
         livenessProbe:
           httpGet:
-            path: /
-            port: 80
+            path: /health
+            port: 3001
           initialDelaySeconds: 5
           periodSeconds: 3
 ---
@@ -55,7 +55,7 @@ spec:
     app: sharestreet
   ports:
     - protocol: TCP
-      port: 80
+      port: 3001
       nodePort: 30080
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -70,7 +70,7 @@ metadata:
 spec:
   backend:
     serviceName: sharestreet-svc
-    servicePort: 80
+    servicePort: 3001
 ---
 apiVersion: networking.gke.io/v1beta2
 kind: ManagedCertificate
