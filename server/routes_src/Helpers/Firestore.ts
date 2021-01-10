@@ -10,6 +10,35 @@ export default class FirestoreAccess {
         });
     }
     /**
+     * Fetches info about listing
+     * @param id 
+     */
+    async getListing(id: string): Promise<Listing> {
+        const doc = await this.#db.collection('listings').doc(id).get();
+        if (!doc.exists) {
+            throw new Error("Listing " + id + " not found!");
+        } else {
+            return doc.data() as Listing;
+        }
+    }
+    /**
+     * Creates a listing
+     * @param submitter 
+     * @param item 
+     * @param description 
+     * @param quantity 
+     * @param unit 
+     * @param type 
+     */
+    async createListing(submitter: string, item: string, description: string, quantity: number, unit: "Kilograms" | "Containers" | "Milliliters" | "Each", type: "Request" | "Offer") {
+        const timestamp = Date.now();
+        const id = uuidv4();
+        const doc = this.#db.collection('listings').doc(id);
+        await doc.set({
+            submitter, item, description, quantity, unit, type, timestamp
+        });
+    }
+    /**
      * Registers a User
      * @param username User's username
      * @param email User's email

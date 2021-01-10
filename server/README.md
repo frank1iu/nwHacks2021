@@ -22,4 +22,5 @@ Post body:
 |:--:|:--:|:--:|
 |`username`|`string`||
 |`email`|`string`||
+|`name`|`string`||
 |`type`|`"Organization" \| "Individual"`||
