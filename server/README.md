@@ -8,7 +8,7 @@ install `node`, then install TypeScript using `npm install -g typescript`
 
 ### Launch Dev Server
 
-`npm start`
+`npm run dev`
 
 ## Endpoints
 
