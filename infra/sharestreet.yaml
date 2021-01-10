@@ -66,6 +66,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: "sharestreet-ingress"
+    networking.gke.io/managed-certificates: certificate-name
 spec:
   rules:
   - http:
@@ -74,3 +75,12 @@ spec:
         backend:
           serviceName: sharestreet-svc
           servicePort: 30080
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: certificate-name
+spec:
+  domains:
+    - www.sharestreet.space
+    - sharestreet.space
