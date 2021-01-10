@@ -9,67 +9,82 @@ import Grid from '@material-ui/core/Grid';
 import OfferItems from "../components/OfferItems";
 import RequestItems from "../components/RequestItems";
 import MyItems from "../components/MyItems";
+import 'react-tabs/style/react-tabs.css';
+
 
 const useStyles = makeStyles((theme) => ({
+  mainPanel: {
+    background: '#f0f0f0',
+    outline: 'grey',
+  },
+  searchbar: {
+    top: '5px',
+    background: 'white'
+  },
+  searchbutton: {
+    top: '5px',
+    minHeight: '12px',
+    minWidth: '10px'
+  }
 }));
 
 export default function MainTabs() {
   const classes = useStyles();
 
-    return (
-      <div>
-        <Tabs>
-          <TabList>
-            <Tab>Offers</Tab>
-            <Tab>Requests</Tab>
-            <Tab>My Dashboard</Tab>
-          </TabList>
+  return (
+    <div>
+      <Tabs>
+        <TabList className={classes.tabs}>
+          <Tab className={classes.offers}>Offers</Tab>
+          <Tab>Requests</Tab>
+          <Tab className={classes.mydashboard}>My Dashboard</Tab>
+        </TabList>
 
-          <TabPanel>
-            <Grid container  alignItems="center" justify="center">
-              <Input style={{width: "400px"}} type="text" placeholder="Search Offers..." />
-              <Button>
-                <SearchOutlined />
-              </Button>
-            </Grid>
-            <OfferItems /> 
-            <OfferItems />
-            <OfferItems />
-            <OfferItems />
-            <OfferItems />
-            <OfferItems />
-            {/* Placeholders */}
-          </TabPanel>
-          <TabPanel>
-            <Grid container  alignItems="center" justify="center">
-              <Input style={{width: "400px"}} type="text" placeholder="Search Requests..." />
-              <Button>
-                <SearchOutlined />
-              </Button>
-            </Grid>
-            <RequestItems />
-            <RequestItems />
-            <RequestItems />
-            <RequestItems />
-            <RequestItems />
-            {/* Placeholders */}
-          </TabPanel>
-          <TabPanel>
-            <Grid container  alignItems="center" justify="center">
-              <Input style={{width: "400px"}} type="text" placeholder="Search My Listings..." />
-              <Button>
-                <SearchOutlined />
-              </Button>
-            </Grid>
-            <MyItems />
-            <MyItems />
-            <MyItems />
-            <MyItems />
-            <MyItems />
-            <MyItems />
-            {/* Placeholders */}
-          </TabPanel>
-        </Tabs>
-      </div>
-    );
+        <TabPanel className={classes.mainPanel}>
+          <Grid container  alignItems="center" justify="center">
+            <Input className={classes.searchbar} style={{width: "400px"}} type="text" placeholder="  Search Offers..." />
+            <Button className={classes.searchbutton}>
+              <SearchOutlined />
+            </Button>
+          </Grid>
+          <OfferItems /> 
+          <OfferItems />
+          <OfferItems />
+          <OfferItems />
+          <OfferItems />
+          <OfferItems />
+          {/* Placeholders */}
+        </TabPanel>
+        <TabPanel className={classes.mainPanel}>
+          <Grid container  alignItems="center" justify="center">
+            <Input className={classes.searchbar} style={{width: "400px"}} type="text" placeholder="  Search Requests..." />
+            <Button className={classes.searchbutton}>
+              <SearchOutlined />
+            </Button>
+          </Grid>
+          <RequestItems />
+          <RequestItems />
+          <RequestItems />
+          <RequestItems />
+          <RequestItems />
+          {/* Placeholders */}
+        </TabPanel>
+        <TabPanel className={classes.mainPanel}>
+          <Grid container  alignItems="center" justify="center">
+            <Input className={classes.searchbar} style={{width: "400px"}} type="text" placeholder="  Search My Listings..." />
+            <Button className={classes.searchbutton}>
+              <SearchOutlined />
+            </Button>
+          </Grid>
+          <MyItems />
+          <MyItems />
+          <MyItems />
+          <MyItems />
+          <MyItems />
+          <MyItems />
+          {/* Placeholders */}
+        </TabPanel>
+      </Tabs>
+    </div>
+  );
 }
