@@ -1,12 +1,23 @@
 import React from "react";
-import { Button, Input } from "@material-ui/core";
+import { Input } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Items from "../components/Items";
 import { SearchOutlined } from "@material-ui/icons";
+import { makeStyles } from '@material-ui/core/styles';
 
-class MainTabs extends React.Component {
-  render() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
+export default function MainTabs() {
+  const classes = useStyles();
+
     return (
       <div>
         <Tabs>
@@ -44,7 +55,4 @@ class MainTabs extends React.Component {
         </Tabs>
       </div>
     );
-  }
 }
-
-export default MainTabs;

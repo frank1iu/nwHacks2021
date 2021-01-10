@@ -3,9 +3,7 @@ import { MuiThemeProvider } from "@material-ui/core";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Link,
-  Redirect,
+  Switch
 } from "react-router-dom";
 
 import { theme } from "./themes/theme";
