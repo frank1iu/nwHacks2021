@@ -10,9 +10,11 @@ class CreateNewRequest extends React.Component {
   render() {
     return (
       <div>
-        <NavLink to="/">
-          <Button>Back</Button>
-        </NavLink>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <NavLink to="/">
+            <Button>Home</Button>
+          </NavLink>
+        </div>
         <Tabs>
           <TabList>
             <Tab>Create New Request</Tab>
