@@ -24,8 +24,10 @@ export default function MainTabs() {
     fetch(`http://localhost:3001/listing/${userInfo}`, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
-        params: userInfo // body data type must match "Content-Type" header
-      }).then(obj => console.log(obj))
+        // params: userInfo // body data type must match "Content-Type" header
+      }).then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }, [])
 
     return (

@@ -28,7 +28,7 @@ export default class FirestoreAccess {
      */
     async getAllListings(): Promise<object> {
         const doc = await this.#db.collection('listings').get();
-        if (!doc.empty) {
+        if (doc.empty) {
             throw new Error("No listings found!");
         } else {
             const offers = new Array<Listing>();

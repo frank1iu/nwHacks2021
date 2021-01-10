@@ -29,6 +29,9 @@ export default function ItemInput({listingType}) {
     const data = {submitter, description, item, quantity: parseInt(quantity), unit: "Each", type: listingType}
     console.log(data)
     fetch(`http://localhost:3001/listing`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       body: JSON.stringify(data) // body data type must match "Content-Type" header
