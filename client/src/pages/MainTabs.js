@@ -33,6 +33,8 @@ export default function MainTabs() {
 
   const [offers, setOffers] = useState([])
   const [requests, setRequests] = useState([])
+  const [offerSearch, setOfferSearch] = useState("")
+  const [requestSearch, setRequestSearch] = useState("")
 
   useEffect(() => {
     const userInfo = localStorage.getItem('user');
@@ -41,9 +43,32 @@ export default function MainTabs() {
         mode: 'cors', // no-cors, *cors, same-origin
         // params: userInfo // body data type must match "Content-Type" header
       }).then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        if(res.listings){
+          setOffers(res.listings.offers);
+          setRequests(res.listings.requests);
+        }
+      })
       .catch(err => console.log(err));
   }, [])
+
+  // const renderOffers = () => {
+  //   const filtered = offers.filter((offer, idx) => offer.item.toLowerCase().includes(offerSearch.toLocaleLowerCase())) || offerSearch === "";
+  //   console.log(filtered)
+  //   const output = filtered.map((offer, idx) => 
+  //     <RequestItems key={`${idx}|${offer.item}|${offer.submitter}`} submitter={offer.submitter} item={offer.item} description={offer.description} quantity={offer.quantity} timestamp={offer.timestamp} /> 
+  //   );
+  //   return output;
+  // }
+
+  // const renderRequests = () => {
+  //   const filtered = requests.filter((request, idx) => request.item.toLowerCase().includes(requestSearch.toLocaleLowerCase()));
+  //   const output = filtered.map((request, idx) => 
+  //     <RequestItems key={`${idx}|${request.item}|${request.submitter}`} submitter={request.submitter} item={request.item} description={request.description} quantity={request.quantity} timestamp={request.timestamp} /> 
+  //   );
+  //   return output;
+  // }
 
   return (
     <div>
@@ -56,32 +81,25 @@ export default function MainTabs() {
 
         <TabPanel className={classes.mainPanel}>
           <Grid container  alignItems="center" justify="center">
-            <Input className={classes.searchbar} style={{width: "400px"}} type="text" placeholder="  Search Offers..." />
+            <Input className={classes.searchbar} style={{width: "400px"}} type="text" value={offerSearch} onChange={e => setOfferSearch(e.target.value)} placeholder="  Search Offers..." />
             <Button className={classes.searchbutton}>
               <SearchOutlined />
             </Button>
           </Grid>
-          <OfferItems /> 
-          <OfferItems />
-          <OfferItems />
-          <OfferItems />
-          <OfferItems />
-          <OfferItems />
-          {/* Placeholders */}
+          {offers && offers.map((offer, idx) => 
+            <RequestItems key={`${idx}|${offer.item}|${offer.submitter}`} submitter={offer.submitter} item={offer.item} description={offer.description} quantity={offer.quantity} timestamp={offer.timestamp} /> 
+          )}
         </TabPanel>
         <TabPanel className={classes.mainPanel}>
           <Grid container  alignItems="center" justify="center">
-            <Input className={classes.searchbar} style={{width: "400px"}} type="text" placeholder="  Search Requests..." />
+            <Input className={classes.searchbar} style={{width: "400px"}} type="text" value={requestSearch} onChange={e => setRequestSearch(e.target.value)} placeholder="  Search Requests..." />
             <Button className={classes.searchbutton}>
               <SearchOutlined />
             </Button>
           </Grid>
-          <RequestItems />
-          <RequestItems />
-          <RequestItems />
-          <RequestItems />
-          <RequestItems />
-          {/* Placeholders */}
+          {requests && requests.map((request, idx) => 
+            <RequestItems key={`${idx}|${request.item}|${request.submitter}`} submitter={request.submitter} item={request.item} description={request.description} quantity={request.quantity} timestamp={request.timestamp} /> 
+          )}
         </TabPanel>
         <TabPanel className={classes.mainPanel}>
           <Grid container  alignItems="center" justify="center">

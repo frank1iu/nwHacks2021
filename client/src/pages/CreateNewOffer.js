@@ -46,7 +46,7 @@ export default function CreateNewOffer() {
             <Tab>Create New Offer</Tab>
           </TabList>
           <TabPanel className={classes.mainPanel}>
-            <ItemInput listingType="Offer" />
+            <ItemInput listingtype="Offer" />
           </TabPanel>
         </Tabs>
       </div>
