@@ -15,14 +15,14 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     position: 'absolute',
     top: 12,
-    left: 10,
+    left: 30,
   },
   main: {
     marginTop: '80px',
   },
   homeButton: {
     position: 'absolute',
-    right: '30px',
+    right: '50px',
     top: '18px',
     color: "black",
     border: '2px solid orange',
@@ -38,7 +38,7 @@ export default function CreateNewRequest() {
         <img className={classes.logo} alt="share street logo" style={{ width: 140, height: 50 }} src={logo}/>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <NavLink to="/">
-            <Button className={classes.homeButton}>Home</Button>
+            <Button className={classes.homeButton}>Back</Button>
           </NavLink>
         </div>
         <Tabs>

@@ -15,7 +15,7 @@ import 'react-tabs/style/react-tabs.css';
 const useStyles = makeStyles((theme) => ({
   mainPanel: {
     background: '#E9E9E9',
-    outline: 'grey'
+    outline: 'grey',
   },
   searchbar: {
     top: '5px',
@@ -34,7 +34,7 @@ export default function MainTabs() {
   return (
     <div>
       <Tabs>
-        <TabList>
+        <TabList className={classes.tabs}>
           <Tab className={classes.offers}>Offers</Tab>
           <Tab>Requests</Tab>
           <Tab className={classes.mydashboard}>My Dashboard</Tab>

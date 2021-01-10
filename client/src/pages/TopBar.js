@@ -34,17 +34,17 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     position: 'absolute',
     top: 12,
-    left: 10,
+    left: 30,
   },
   iconButtons: {
     position: 'absolute',
     top: 15,
-    right: 280,
+    right: 230,
   },
   mainButtons: {
     position: 'absolute',
     top: 20,
-    right: 20,
+    right: 50,
   }
 }));
 
@@ -70,14 +70,14 @@ export default function TopBar() {
             <Button 
               className={classes.offerButton}
               variant="outlined" 
-            >Create Offer</Button>
+            >Offer</Button>
           </NavLink>
           &nbsp;
           <NavLink to="/requestform" style={{ textDecoration: 'none' }}>
             <Button 
               className={classes.requestButton}
               variant="outlined"
-            >Create Request</Button>
+            >Receive</Button>
           </NavLink>
         </Grid>
     </div>

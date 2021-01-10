@@ -83,7 +83,7 @@ export default function RequestItems() {
             </Grid>
             <Grid item>
               <Button className={classes.request}>
-                Fill Request
+                Give
               </Button>
             </Grid>
           </Grid>
