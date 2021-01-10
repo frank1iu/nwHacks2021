@@ -1,6 +1,7 @@
 FROM node:lts-alpine as builder
 WORKDIR /src
 COPY . .
+RUN npm i
 RUN npm i -g typescript
 RUN tsc
 

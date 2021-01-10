@@ -15,7 +15,8 @@ import 'react-tabs/style/react-tabs.css';
 const useStyles = makeStyles((theme) => ({
   mainPanel: {
     background: '#f0f0f0',
-    outline: 'grey',
+    outline: '2px',
+    borderTop: '2px'
   },
   searchbar: {
     top: '5px',

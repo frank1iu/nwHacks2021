@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { InputBase, Button } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -11,6 +11,7 @@ import {
   NavLink,
   Redirect
 } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     justify: 'center',
@@ -65,13 +66,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ItemInput({listingtype}) {
   const classes = useStyles();
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+  }
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  }
 
   const [item, setItem] = useState("")
   const [description, setDescription] = useState("")
   const [quantity, setQuantity] = useState(null)
   const [redirect, setRedirect] = useState(false)
 
-  const createListing = () => {
+  const createListing = (e) => {
+    e.target.reset()
     const submitter = localStorage.getItem("user")
     console.log(listingtype)
     const data = {submitter, description, item, quantity: parseInt(quantity), unit: "Each", type: listingtype}
@@ -113,8 +128,8 @@ export default function ItemInput({listingtype}) {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
+          </Paper>
+        </Grid>
+      </form>
   );
 }
