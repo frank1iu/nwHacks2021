@@ -23,6 +23,12 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
@@ -31,7 +37,7 @@ metadata:
   namespace: sharestreet
 spec:
   maxReplicas: 10
-  minReplicas: 2
+  minReplicas: 3
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -41,13 +47,30 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sharestreet-lb
+  name: sharestreet-svc
   namespace: sharestreet
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: sharestreet
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      nodePort: 30080
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sharestreet-ingress
+  namespace: sharestreet
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "sharestreet-ingress"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: sharestreet-svc
+          servicePort: 30080
