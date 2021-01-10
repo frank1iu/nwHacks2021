@@ -3,16 +3,14 @@ import { Input } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Items from "../components/Items";
 import { SearchOutlined } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import OfferItems from "../components/OfferItems";
+import RequestItems from "../components/RequestItems";
+import MyItems from "../components/MyItems";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
 }));
 
 export default function MainTabs() {
@@ -28,29 +26,48 @@ export default function MainTabs() {
           </TabList>
 
           <TabPanel>
-            <Input type="text" placeholder="Search Offers..." />
-            <Button>
-              <SearchOutlined />
-            </Button>
-
-            <Items />
-            <Items />
+            <Grid container  alignItems="center" justify="center">
+              <Input style={{width: "400px"}} type="text" placeholder="Search Offers..." />
+              <Button>
+                <SearchOutlined />
+              </Button>
+            </Grid>
+            <OfferItems /> 
+            <OfferItems />
+            <OfferItems />
+            <OfferItems />
+            <OfferItems />
+            <OfferItems />
+            {/* Placeholders */}
           </TabPanel>
           <TabPanel>
-            <Input type="text" placeholder="Search Requests..." />
-            <Button>
-              <SearchOutlined />
-            </Button>
-            <Items />
-            <Items />
+            <Grid container  alignItems="center" justify="center">
+              <Input style={{width: "400px"}} type="text" placeholder="Search Requests..." />
+              <Button>
+                <SearchOutlined />
+              </Button>
+            </Grid>
+            <RequestItems />
+            <RequestItems />
+            <RequestItems />
+            <RequestItems />
+            <RequestItems />
+            {/* Placeholders */}
           </TabPanel>
           <TabPanel>
-            <Input type="text" placeholder="Search My Listings..." />
-            <Button>
-              <SearchOutlined />
-            </Button>
-            <Items />
-            <Items />
+            <Grid container  alignItems="center" justify="center">
+              <Input style={{width: "400px"}} type="text" placeholder="Search My Listings..." />
+              <Button>
+                <SearchOutlined />
+              </Button>
+            </Grid>
+            <MyItems />
+            <MyItems />
+            <MyItems />
+            <MyItems />
+            <MyItems />
+            <MyItems />
+            {/* Placeholders */}
           </TabPanel>
         </Tabs>
       </div>
