@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Input } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -31,13 +31,27 @@ const useStyles = makeStyles((theme) => ({
 export default function MainTabs() {
   const classes = useStyles();
 
+  const [offers, setOffers] = useState([])
+  const [requests, setRequests] = useState([])
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('user');
+    fetch(`http://localhost:3001/listing/${userInfo}`, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        // params: userInfo // body data type must match "Content-Type" header
+      }).then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }, [])
+
   return (
     <div>
       <Tabs>
         <TabList className={classes.tabs}>
           <Tab className={classes.offers}>Offers</Tab>
           <Tab>Requests</Tab>
-          <Tab className={classes.mydashboard}>My Dashboard</Tab>
+          <Tab className={classes.mydashboard} style={{float:"right"}} >My Dashboard</Tab>
         </TabList>
 
         <TabPanel className={classes.mainPanel}>

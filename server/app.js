@@ -1,8 +1,10 @@
 const createError = require("http-errors");
 const express = require("express");
+const cors = require('cors')
 const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+
 
 const indexRouter = require("./routes/index");
 
@@ -10,6 +12,7 @@ const { json, urlencoded } = express;
 
 var app = express();
 
+app.use(cors())
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));

@@ -1,4 +1,5 @@
 import {Firestore} from '@google-cloud/firestore';
+import { request } from 'express';
 import {v4 as uuidv4} from 'uuid';
 
 export default class FirestoreAccess {
@@ -21,6 +22,31 @@ export default class FirestoreAccess {
             return doc.data() as Listing;
         }
     }
+
+    /**
+     * Fetches all listings
+     */
+    async getAllListings(): Promise<object> {
+        const doc = await this.#db.collection('listings').get();
+        if (doc.empty) {
+            throw new Error("No listings found!");
+        } else {
+            const offers = new Array<Listing>();
+            const requests = new Array<Listing>();
+
+            doc.forEach(listing => {
+                const listingData = listing.data() as Listing;
+                if(listingData.type === "Offer") {
+                    offers.push(listingData);
+                } else {
+                    requests.push(listingData);
+                }
+            })
+            const allListings = {offers: offers, requests: requests};
+            return allListings;
+        }
+    }
+
     /**
      * Creates a listing
      * @param submitter 
@@ -59,17 +85,17 @@ export default class FirestoreAccess {
      * @param password User's password
      * @returns Promise containing user
      */
-    async login(username: string, password: string): Promise<User> {
+    async login(username: string): Promise<User> {
         const doc = await this.#db.collection('users').doc(username).get();
         if (!doc.exists) {
             throw new Error("User " + username + " not found!");
         }
         const data = doc.data() as User;
-        if (data.password === password) {
-            return data;
-        } else {
-            throw new Error("Incorrect password for user " + username);
-        }
+        return data;
+        // if (data.password === password) {
+        // } else {
+        //     throw new Error("Incorrect password for user " + username);
+        // }
     }
 
     /**
