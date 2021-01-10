@@ -66,19 +66,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ItemInput({listingtype}) {
   const classes = useStyles();
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />
-  }
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  }
 
   const [item, setItem] = useState("")
   const [description, setDescription] = useState("")
@@ -128,8 +115,8 @@ export default function ItemInput({listingtype}) {
                 </Grid>
               </Grid>
             </Grid>
-          </Paper>
-        </Grid>
-      </form>
+          </Grid>
+        </Paper>
+      </Grid>
   );
 }
