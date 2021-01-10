@@ -37,7 +37,7 @@ export default function CreateNewRequest() {
       <div className={classes.main}>
         <img className={classes.logo} alt="share street logo" style={{ width: 140, height: 50 }} src={logo}/>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <NavLink to="/">
+          <NavLink to="/main">
             <Button className={classes.homeButton}>Back</Button>
           </NavLink>
         </div>
