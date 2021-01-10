@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import { Divider, Grid, Paper } from '@material-ui/core';
-import classes from "./pages.css"
 import {
   BrowserRouter as Router,
   Route,
@@ -21,11 +20,29 @@ import {
 const useStyles = makeStyles((theme) => ({
   offerButton: {
     color: "white",
-    background: '#8FDDEC'
+    background: '#8FDDEC',
+  },
+  main: {
+    padding: '38px', 
   },
   requestButton: {
     color: "white",
     background: '#FFB478'
+  },
+  logo: {
+    position: 'absolute',
+    top: 12,
+    left: 10,
+  },
+  iconButtons: {
+    position: 'absolute',
+    top: 15,
+    right: 280,
+  },
+  mainButtons: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
   }
 }));
 
@@ -33,30 +50,34 @@ export default function TopBar() {
   const classes = useStyles();
 
   return (
-    <div>
-        <img alt="share street logo" style={{ width: 120, height: 45 }} src={logo}/>
-        <IconButton>
-          <InboxOutlined/>
-        </IconButton>
-        <IconButton>
-          <MessageOutlined />
-        </IconButton>
-        <IconButton>
-         <NotificationsOutlined />
-        </IconButton>
-      
-        <NavLink to="/offerform">
-          <Button 
-            className={classes.offerButton}
-            variant="contained" 
-          >Create Offer</Button>
-        </NavLink>
-        <NavLink to="/requestform">
-          <Button 
-            className={classes.requestButton}
-            variant="contained"
-          >Create Request</Button>
-        </NavLink>
+    <div className={classes.main}>
+        <img className={classes.logo} alt="share street logo" style={{ width: 120, height: 45 }} src={logo}/>
+        <Grid className={classes.iconButtons}>
+          <IconButton>
+            <InboxOutlined/>
+          </IconButton>
+          <IconButton>
+            <MessageOutlined />
+          </IconButton>
+          <IconButton>
+          <NotificationsOutlined />
+          </IconButton>
+        </Grid>
+        <Grid className={classes.mainButtons}>
+          <NavLink to="/offerform">
+            <Button 
+              className={classes.offerButton}
+              variant="contained" 
+            >Create Offer</Button>
+          </NavLink>
+          &nbsp;
+          <NavLink to="/requestform">
+            <Button 
+              className={classes.requestButton}
+              variant="contained"
+            >Create Request</Button>
+          </NavLink>
+        </Grid>
     </div>
   );
 }
