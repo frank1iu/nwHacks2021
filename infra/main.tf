@@ -7,5 +7,5 @@ terraform {
 provider "google" {
   credentials   = file("credentials-terraform.json")
   project       = var.project
-  region        = "northamerica-northeast1"
+  region        = var.region
 }
