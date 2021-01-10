@@ -1,4 +1,5 @@
 import express = require("express");
+import path = require("path");
 import FirestoreAccess from "./Helpers/Firestore";
 const router = express.Router();
 const db = new FirestoreAccess(process.env.FIRESTORE_PROJECT, process.env.FIRESTORE_KEYFILE);
@@ -66,5 +67,7 @@ router.post("/message", async (req, res, next) => {
   const success = await db.addMessage(req.body.username, req.body.conversationId, req.body.text);
   res.status(200).send({success});
 });
+
+router.get('*', (req, res) => res.sendFile(path.resolve('static', 'index.html')));
 
 export = router;
