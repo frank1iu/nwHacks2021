@@ -32,4 +32,24 @@ router.patch("/notification", async (req, res, next) => {
   res.status(200).send({success});
 });
 
+router.get("/conversations", async (req, res, next) => {
+  try {
+    // const user = await db.login(req.body.username, req.body.password);
+    const conversations = await db.getConversations(req.body.username);
+    res.status(200).send({success: true, conversations});
+  } catch (_) {
+    res.status(304).send({success: false});
+  }
+});
+
+router.post("/conversations", async (req, res, next) => {
+  const success = await db.createConversation(req.body.username1, req.body.username2);
+  res.status(200).send({success});
+});
+
+router.post("/message", async (req, res, next) => {
+  const success = await db.addMessage(req.body.username, req.body.conversationId, req.body.text);
+  res.status(200).send({success});
+});
+
 export = router;
