@@ -10,12 +10,15 @@ const useStyles = makeStyles((theme) => ({
     padding: '30px'
   },
   chooseFile:{
-    marginLeft: '10px'
+    marginLeft: '30px',
+    height: '10px',
   },
   post: {
     background: '#ffc06e',
     alignSelf: 'right',
-    marginTop: '7px'
+    marginTop: '7px',
+    borderRadius: 0,
+    marginBottom: '8px'
   },
   description: {
     height: '100px',
@@ -38,7 +41,18 @@ const useStyles = makeStyles((theme) => ({
     height: '40px',
     width: '400px',
     background: '#fafafa',
-    marginTop: '5px'
+    marginTop: '10px'
+  },
+  fileLabel: {
+    marginLeft: '22px',
+    marginTop: '10px',
+    fontSize: 13,
+    background: '#fafafa',
+    width: '100px',
+    height: '70px',
+    textAlign: 'center',
+    padding: '50px',
+    color: 'grey'
   }
 }))
 
@@ -50,8 +64,11 @@ export default function ItemInput() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm container>
               <Grid className={classes.second} item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
+                <Grid item xs> 
+                  <Grid> 
+                    <p className={classes.fileLabel}>Attach an image</p>
+                    <InputBase className={classes.chooseFile} type="file" inputProps={{ accept: "image/*" }} />
+                  </Grid>
                 </Grid>
               </Grid>
               <Grid item>

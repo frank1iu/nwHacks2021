@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   mainPanel: {
-    background: '#E9E9E9',
+    background: '#f0f0f0',
     height: '1000px'
   },
   logo: {
