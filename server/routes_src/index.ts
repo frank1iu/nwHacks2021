@@ -12,10 +12,25 @@ router.post("/register", async (req, res, next) => {
   res.status(200).send({success: true, password: password});
 });
 
+router.get("/listing/:username", async (req, res, next) => {
+  try {
+    const user = await db.login(req.params.username);
+    const listings = await db.getAllListings();
+    res.status(200).send({success: true, listings});
+  } catch (_) {
+    res.status(304).send({success: false});
+  }
+});
+
+router.post("/listing", async (req, res, next) => {
+  const success = await db.createListing(req.body.submitter, req.body.item, req.body.description, req.body.quantity, req.body.unit as any, req.body.type as any);
+  res.status(200).send({success});
+});
+
 router.get("/notification", async (req, res, next) => {
   try {
-    const user = await db.login(req.body.username, req.body.password);
-    const notifications = await db.getNotifications(req.body.username);
+    const user = await db.login(req.params.username);
+    const notifications = await db.getNotifications(req.params.username);
     res.status(200).send({success: true, notifications});
   } catch (_) {
     res.status(304).send({success: false});
@@ -34,7 +49,7 @@ router.patch("/notification", async (req, res, next) => {
 
 router.get("/conversations", async (req, res, next) => {
   try {
-    // const user = await db.login(req.body.username, req.body.password);
+    const user = await db.login(req.params.username);
     const conversations = await db.getConversations(req.body.username);
     res.status(200).send({success: true, conversations});
   } catch (_) {

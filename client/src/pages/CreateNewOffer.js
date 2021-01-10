@@ -19,7 +19,7 @@ class CreateNewOffer extends React.Component {
             <Tab>Create New Request</Tab>
           </TabList>
           <TabPanel>
-            <ItemInput />
+            <ItemInput listingType="Offer" />
           </TabPanel>
         </Tabs>
       </div>

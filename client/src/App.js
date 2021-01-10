@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { MuiThemeProvider } from "@material-ui/core";
 import {
   BrowserRouter as Router,
@@ -13,6 +13,12 @@ import CreateNewOffer from "./pages/CreateNewOffer";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    const localStorage = window.localStorage;
+    localStorage.clear();
+    localStorage.setItem('user', "integrationTest"); //username
+  }, [])
+
   return (
     <MuiThemeProvider theme={theme}>
       <Router>

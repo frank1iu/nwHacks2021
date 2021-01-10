@@ -19,7 +19,7 @@ class CreateNewRequest extends React.Component {
             <Tab>Create New Request</Tab>
           </TabList>
           <TabPanel>
-            <ItemInput />
+            <ItemInput listingType="Request" />
           </TabPanel>
         </Tabs>
       </div>
