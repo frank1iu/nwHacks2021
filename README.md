@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/a1VxImp.png">
 </p>
 
-![](https://img.shields.io/badge/K8s-v1.16.15-success?logo=kubernetes)
+![](https://img.shields.io/badge/Kubernetes-v1.16.15-success?logo=kubernetes)
 ![](https://img.shields.io/badge/Terraform-v0.14.4-success?logo=terraform)
 ![](https://img.shields.io/badge/React-17.0.1-success?logo=react)
 
