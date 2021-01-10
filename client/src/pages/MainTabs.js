@@ -51,7 +51,7 @@ export default function MainTabs() {
         <TabList className={classes.tabs}>
           <Tab className={classes.offers}>Offers</Tab>
           <Tab>Requests</Tab>
-          <Tab className={classes.mydashboard}>My Dashboard</Tab>
+          <Tab className={classes.mydashboard} style={{float:"right"}} >My Dashboard</Tab>
         </TabList>
 
         <TabPanel className={classes.mainPanel}>
