@@ -6,7 +6,7 @@
 ![](https://img.shields.io/badge/Terraform-v0.14.4-success?logo=terraform)
 ![](https://img.shields.io/badge/React-17.0.1-success?logo=react)
 
-200 character pitch line
+Share Street is a web app facilitating the sharing of resources between organizations by making it fast and easy to post requests and offers of items for their community and networks to view and fulfill.
 
 ## Getting started
 
