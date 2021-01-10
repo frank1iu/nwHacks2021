@@ -26,6 +26,7 @@ interface Notification {
   /**
    * Refers to the id of a User
    */
+  username: string;
   content: string;
   type: "matchingListing" | "messageReceived";
   read: boolean;
