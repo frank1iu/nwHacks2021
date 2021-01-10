@@ -65,6 +65,7 @@ metadata:
   namespace: sharestreet
   annotations:
     kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "sharestreet-ingress"
 spec:
   rules:
   - http:

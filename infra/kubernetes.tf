@@ -7,3 +7,7 @@ resource "google_container_cluster" "backend" {
     machine_type = "e2-medium"
   }
 }
+
+resource "google_compute_address" "ingress" {
+  name = "sharestreet-ingress"
+}
