@@ -11,7 +11,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: sharestreet
   replicas: 2
   template:
     metadata:
@@ -37,3 +37,17 @@ spec:
     kind: Deployment
     name: sharestreet
   targetCPUUtilizationPercentage: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharestreet-lb
+  namespace: sharestreet
+spec:
+  type: LoadBalancer
+  selector:
+    app: sharestreet
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
