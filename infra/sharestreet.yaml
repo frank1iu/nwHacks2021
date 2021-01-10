@@ -23,13 +23,12 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
-        properties:
-          livenessProbe:
-            httpGet:
-              path: /health
-            port: 3001
-            initialDelaySeconds: 5
-            periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+          port: 3001
+          initialDelaySeconds: 5
+          periodSeconds: 3
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
