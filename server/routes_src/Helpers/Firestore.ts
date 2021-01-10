@@ -71,4 +71,62 @@ export default class FirestoreAccess {
             throw new Error("Incorrect password for user " + username);
         }
     }
+
+    /**
+     * Adds a notification to a user
+     * @param username User's username
+     * @param content Notification content (text, potential link)
+     * @param type Notification type. Currently either a matching listing, or receiving a message
+     * @returns Promise containing success/fail result
+     */
+    async addNotification(username: string, content: string, type: "matchingListing" | "messageReceived"): Promise<boolean> {
+        const userDoc = await this.#db.collection('users').doc(username).get();
+        if (!userDoc.exists) {
+            throw new Error("User " + username + " not found!");
+        }
+        const id = uuidv4();
+        const read = false;
+        const notificationTimestamp = new Date()
+        const notificationDoc = this.#db.collection('notifications').doc(id);
+        await notificationDoc.set({
+            id, username, content, type, read, notificationTimestamp
+        })
+        return true
+    }
+
+    /**
+     * Marks an array of notification as read
+     * @param idArray notification Id
+     * @returns Promise containing success/fail result
+     */
+    async markNotificationAsRead(idArray: Array<string>): Promise<boolean> {
+        idArray.forEach(async id => {
+            const docRef = await this.#db.collection('notifications').doc(id);
+            // will automatically fail if doc does not exist
+            docRef.update({read: true});
+        });
+        return true;
+    }
+
+    /**
+     * Gets all of a user's notifications (lol no need for pagination/read vs. unread)
+     * @param username User's username
+     * @returns Promise containing all notifications
+     */
+    async getNotifications(username: string): Promise<Array<Notification>> {
+        const notificationsRef = this.#db.collection('notifications');
+        const userNotificationsSnapshot = await notificationsRef.where('username', '==', username).get();
+
+        if (userNotificationsSnapshot.empty) {
+            throw new Error("No notifications found");
+        }  
+
+        const userNotifications = [] as Array<Notification>
+
+        userNotificationsSnapshot.forEach(async doc => {
+            const data = await doc.data() as Notification;
+            userNotifications.push(data)
+          });
+        return userNotifications;
+    }
 }
