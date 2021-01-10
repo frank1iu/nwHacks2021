@@ -10,7 +10,7 @@ Share Street is a web app facilitating the sharing of resources between organiza
 
 ## Getting started
 
-The project is broken down into a client and server folder.
+The application is broken down into a client and server folder.
 
 ### Running the Frontend
 
@@ -23,3 +23,13 @@ The project is broken down into a client and server folder.
 `npm install`
 
 `npm run dev`
+
+## Infrastructure
+
+Terraform code is in `infra/`. To setup the K8s cluster, use
+
+`terraform apply`
+
+After creation of the GKE cluster, deploy the application using
+
+`kubectl apply -f sharestreet.yaml`
