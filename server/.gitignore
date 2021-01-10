@@ -3,3 +3,5 @@ routes
 
 credentials*.json
 package-lock.json
+static
+# this folder is symlinked to ../client/build locally
