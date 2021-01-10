@@ -19,6 +19,7 @@ router.get("/notification", async (req, res, next) => {
     res.status(200).send({success: true, notifications});
   } catch (_) {
     res.status(304).send({success: false});
+  }
 });
 
 router.post("/notification", async (req, res, next) => {
