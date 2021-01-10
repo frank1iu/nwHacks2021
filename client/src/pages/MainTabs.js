@@ -2,6 +2,7 @@ import React from "react";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import Items from "../components/Items";
 
 class MainTabs extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class MainTabs extends React.Component {
 
           <TabPanel>
             <h2>Offers Content</h2>
+            <Items />
           </TabPanel>
           <TabPanel>
             <h2>Requests Content</h2>
